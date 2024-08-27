@@ -1,15 +1,16 @@
 from aiogram import Router, F
 from keyboards.user_kb import *
 
+from utils.limitignore import get_result_for_user
 from data.messages import complex_options
 from aiogram.fsm.context import FSMContext
-from roloc_create import roloc_bot, ADMIN_ID
+from roloc_create import roloc_bot, ADMIN_IDS
 from aiogram.fsm.state import StatesGroup, State
 from utils.media_processor import media_processor
 from middleware.album_middleware import AlbumMiddleware
 
 from services.user_service import check_on_exists
-from services.app_form_service import create_app, app_performer
+from services.app_form_service import create_app, app_performer, apps_by_user_tg_id
 
 from aiogram.types import Message, CallbackQuery, ContentType as Ct, PollAnswer
 
@@ -61,12 +62,24 @@ async def user_app_form_complex(poll_answer: PollAnswer, state: FSMContext):
             await roloc_bot.send_message(poll_answer.user.id, msg_commt)
 
 
-@app_form_router.callback_query(F.data.startswith('menu_1'))
+@app_form_router.callback_query(F.data.startswith('usermenu1'))
 async def user_app_form_start(callback: CallbackQuery, state: FSMContext):
     await state.clear()
     await callback.answer()
     await state.set_state(AppFromState.type)
     await callback.message.edit_text(msg_servs, reply_markup=user_service_kb().as_markup())
+
+@app_form_router.callback_query(F.data.startswith('usermenu4'))
+async def get_all_user_apps(callback: CallbackQuery, state: FSMContext):
+    await state.clear()
+    await callback.answer()
+    app_forms = apps_by_user_tg_id(callback.from_user.id)
+    if app_forms is None:
+        await callback.message.edit_text(msg_userappls_noexs, reply_markup=user_menu_kb().as_markup())
+    elif not app_forms:
+        await callback.message.edit_text(msg_userappls_failed, reply_markup=user_menu_kb().as_markup())
+    elif app_forms is not None:
+        await get_result_for_user(callback, app_forms, roloc_bot)
 
 
 @app_form_router.callback_query(F.data.startswith('serv_'), AppFromState.type)
@@ -306,9 +319,12 @@ async def none_files_state(callback: CallbackQuery, state: FSMContext):
 
             application = app_performer(user_data)
 
-            await roloc_bot.send_message(ADMIN_ID, application)
+            for admin_id in ADMIN_IDS:
+                await roloc_bot.send_message(admin_id, application)
             await callback.message.edit_text(msg_procd, reply_markup=user_menu_kb().as_markup())
 
         else:
-            await roloc_bot.send_message(ADMIN_ID, f"{msg_dberr}\n\n{app_performer(user_data)}")
+            perform_message = f"{msg_dberr}\n\n{app_performer(user_data)}"
+            for admin_id in ADMIN_IDS:
+                await roloc_bot.send_message(admin_id, perform_message)
             await callback.message.edit_text(msg_procd, reply_markup=user_menu_kb().as_markup())

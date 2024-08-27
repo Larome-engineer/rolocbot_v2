@@ -9,3 +9,7 @@ class EnumApplicationsStatus(Enum):
     IN_WORK = 'В работе дизайнера'
     EDITS = 'Правки'
     COMPLETE = 'Завершена'
+
+class EnumHelpStatus(Enum):
+    WAITING = 'В ожидании'
+    COMPLETE = 'Обработан'

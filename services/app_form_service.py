@@ -57,7 +57,7 @@ def app_performer(data: dict) -> str:
 
 def create_app(data: dict) -> None | bool | str | tuple:
     try:
-        tg_id = str(data['user_tg_id'])
+        tg_id = data['user_tg_id']
         user_id = id_by_tg_id_service(tg_id)
 
         if user_id is None:
@@ -105,15 +105,15 @@ def app_info_by_number(number: str) -> None | bool | str:  # get app by NUMBER
         else:
             info_dict = [{
                 '<strong>ТИП ЗАЯВКИ</strong>': f'{app_info[0].capitalize()}\n',
-                '📆 Дата': f"<code>{app_info[1]}</code>",
-                '♻️ Статус заявки': convert_to_enum_value(app_info[2]),
-                '💵 Цена': app_info[3],
-                '💬 Комментарий': app_info[4],
-                '\n👨‍💻 Имя пользователя': app_info[5].capitalize(),
-                '💻 Telegram username': app_info[6],
-                '📞 Номер': f"<code>{app_info[7]}</code>",
+                '📆': f"<code>{app_info[1]}</code>",
+                '♻️': convert_to_enum_value(app_info[2]),
+                '💵': app_info[3],
+                '💬': app_info[4],
+                '\n👨‍💻': app_info[5].capitalize(),
+                '💻': app_info[6],
+                '📞': f"<code>{app_info[7]}</code>",
             }]
-            result = '\n'.join([f'{key}: {value}' if value is not None else f'{key}: -'
+            result = '\n'.join([f'{key} • {value}' if value is not None else f'{key} • -'
                                 for key, value in info_dict[0].items()])
             return result
     except Exception as e:
@@ -139,10 +139,10 @@ def all_apps_by_service(service: str) -> None | bool | str:  # get all apps by S
                 else:
                     tg_username = f'@{i[4]}'
                 result_list.append(
-                    [f"🆔: {i[0]} ({i[1].capitalize()})",
-                     f"♻️ Статус заявки: {convert_to_enum_value(i[2])}",
-                     f"👨‍💻 Заказчик: {i[3].capitalize()}",
-                     f"💻 Telegram username: {tg_username}"]
+                    [f"🆔 • {i[0]} ({i[1].capitalize()})",
+                     f"♻️ • {convert_to_enum_value(i[2])}",
+                     f"👨‍💻 • {i[3].capitalize()}",
+                     f"💻 • {tg_username}"]
                 )
             info = ''
             for i in result_list:
@@ -175,10 +175,10 @@ def all_apps_by_date(app_date: str) -> None | bool | str:  # get all apps by DAT
                     tg_username = f'@{i[4]}'
 
                 result_list.append(
-                    [f"🆔: {i[0]} ({i[1].capitalize()})",
-                     f"♻️ Статус заявки: {convert_to_enum_value(i[2])}",
-                     f"👨‍💻 Заказчик: {i[3].capitalize()}",
-                     f"💻 Telegram username: {tg_username}"]
+                    [f"🆔 • {i[0]} ({i[1].capitalize()})",
+                     f"♻️ • {convert_to_enum_value(i[2])}",
+                     f"👨‍💻 • {i[3].capitalize()}",
+                     f"💻 • {tg_username}"]
                 )
             info = ''
 
@@ -211,9 +211,9 @@ def all_apps_by_status(status: str) -> None | bool | str:  # get all apps by STA
                 else:
                     tg_username = f'@{i[3]}'
 
-                result_list.append([f"🆔: {i[0]} ({i[1].capitalize()})",
-                                    f"👨‍💻 Заказчик: {i[2].capitalize()}",
-                                    f"💻 Telegram username: {tg_username}"]
+                result_list.append([f"🆔 • {i[0]} ({i[1].capitalize()})",
+                                    f"👨‍💻 • {i[2].capitalize()}",
+                                    f"💻 • {tg_username}"]
                                    )
             info = ''
             for i in result_list:
@@ -226,7 +226,6 @@ def all_apps_by_status(status: str) -> None | bool | str:  # get all apps by STA
         logging.log(level=logging.INFO,
                     msg=f"{datetime.datetime.now().ctime()} | {e} | {module_name}: all_apps_by_status")
         return False
-
 
 def all_apps_by_usr_phone(usr_phone: str) -> None | bool | str:  # get all apps by USER_PHONE
     try:
@@ -245,10 +244,10 @@ def all_apps_by_usr_phone(usr_phone: str) -> None | bool | str:  # get all apps 
                     tg_username = f'@{i[4]}'
 
                 result_list.append(
-                    [f"🆔: {i[0]} ({i[1].capitalize()})",
-                     f"♻️ Статус заявки: {convert_to_enum_value(i[2])}",
-                     f"👨‍💻 Заказчик: {i[3].capitalize()}",
-                     f"💻 Telegram username: {tg_username}"]
+                    [f"🆔 • {i[0]} ({i[1].capitalize()})",
+                     f"♻️ • {convert_to_enum_value(i[2])}",
+                     f"👨‍💻 • {i[3].capitalize()}",
+                     f"💻 • {tg_username}"]
                 )
 
             info = ''
@@ -263,6 +262,37 @@ def all_apps_by_usr_phone(usr_phone: str) -> None | bool | str:  # get all apps 
                     msg=f"{datetime.datetime.now().ctime()} | {e} | {module_name}: all_apps_by_usr_phone")
         return False
 
+
+def apps_by_user_tg_id(tg_id: int):
+    try:
+        app_info = get_apps_by_user_tg_id(str(tg_id))
+        if not app_info and type(app_info) is list:
+            return None
+
+        elif not app_info:
+            return False
+        else:
+            result_list = []
+            for i in app_info:
+                result_list.append(
+                    [f"🆔 • {i[0]} ({i[1].capitalize()})",
+                     f"📆 • {i[2]}",
+                     f"♻️ • {convert_to_enum_value(i[3])}",
+                     f"👨‍💻 • {i[4].capitalize()}",
+                     f"📞 • <code>{i[5]}</code>"]
+                )
+
+            info = ''
+            for i in result_list:
+                info += i[0] + '\n' + i[1] + '\n' + i[2] + '\n' + i[3] + '\n' + i[4]
+                if len(result_list) > 1:
+                    info += '\n\n'
+
+            return info.strip()
+    except Exception as e:
+        logging.log(level=logging.INFO,
+                    msg=f"{datetime.datetime.now().ctime()} | {e} | {module_name}: app_info_by_user_tg_id ")
+        return False
 
 '''-----------------------------UPDATE FUNCTIONS-----------------------------'''
 

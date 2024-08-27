@@ -21,11 +21,18 @@ user_kb_text = TOML['user_kb']
 # [TELEGRAM]
 telegram = YAML['telegram']
 webhook = telegram['webhook']
+webapp = telegram['webapp']
 
-ADMIN_ID = telegram['admin_id']
+ADMIN_IDS = telegram['admin_ids']
 BOT_TOKEN = telegram['bot_token']
-WEBHOOK_PATH = f"/bot{BOT_TOKEN}"
-WEBHOOK_URL = webhook['url']
+
+WEBHOOK_DOMAIN = webhook['domain']
+WEBHOOK_PATH = webhook['path']
+WEBHOOK_URL = f"{WEBHOOK_DOMAIN}{WEBHOOK_PATH}"
+
+WEBAPP_HOST = webapp['host']
+WEBAPP_PORT = webapp['port']
+
 
 # [DATABASE]
 database = YAML['database']
@@ -34,9 +41,6 @@ HOST = database['host']
 PORT = database['port']
 USERNAME = database['username']
 PASSWORD = database['password']
-
-print(DBNAME, HOST, PORT, USERNAME, PASSWORD)
-
 
 roloc_bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode='HTML'))
 dp = Dispatcher()

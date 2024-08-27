@@ -6,9 +6,9 @@ logging.basicConfig(level=logging.INFO, filename=LOG_FILE, filemode='w+')
 module_name = 'user_service'
 
 
-def create_user_service(tg_id: str, username: str, tg_username: str, phone: str):
+def create_user_service(tg_id: int, username: str, tg_username: str, phone: str):
     try:
-        created = create_user(tg_id, username, tg_username, phone)
+        created = create_user(str(tg_id), username, tg_username, phone)
         if created[1]:  # if created True: return user_id
             return created[0]
         else:
@@ -19,7 +19,7 @@ def create_user_service(tg_id: str, username: str, tg_username: str, phone: str)
                     msg=f"{datetime.datetime.now().ctime()} | {e} | {module_name}: create_user_service")
 
 
-def id_by_tg_id_service(tg_id: str):
+def id_by_tg_id_service(tg_id: int):
     try:
         user_id = get_user_id_by_user_tg_id(str(tg_id))
         if user_id is not None:

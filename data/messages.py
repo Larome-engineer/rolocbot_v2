@@ -25,15 +25,22 @@ msg_numsd = user_messages['msg_numsd']
 msg_sizze = user_messages['msg_sizze']
 msg_numpg = user_messages['msg_numpg']
 msg_produ = user_messages['msg_produ']
+msg_userhelps_noexs = user_messages["msg_userhelps_noexs"]
+msg_userappls_noexs = user_messages["msg_userappls_noexs"]
+msg_userappls_failed = user_messages["msg_userappls_failed"]
+msg_userhelps_failed = user_messages["msg_userhelps_failed"]
 command_start = user_messages['command_start']
 command_about = user_messages['command_about']
 command_helps = user_messages['command_helps']
 
 # [user_kb]
-menu_1 = user_kb_text['menu_1']
-menu_w = user_kb_text['menu_w']
-menu_2 = user_kb_text['menu_2']
-menu_3 = user_kb_text['menu_3']
+usermenu1 = user_kb_text['usermenu1']
+usermenu_w = user_kb_text['usermenu_w']
+usermenu2 = user_kb_text['usermenu2']
+usermenu3 = user_kb_text['usermenu3']
+usermenu4 = user_kb_text['usermenu4']
+usermenu5 = user_kb_text['usermenu5']
+
 
 link_vk = user_kb_text['link_vk']
 link_tg = user_kb_text['link_tg']
@@ -76,7 +83,13 @@ approve = user_kb_text['approve']
 adm_hello = admin_messages['msg_hello']
 msg_umenu = admin_messages['msg_umenu']
 msg_dberr = admin_messages['msg_dberr']
+msg_dberr_help = admin_messages["msg_dberr_help"]
 msg_error = admin_messages['msg_error']
+msg_help_error = admin_messages['msg_help_error']
+
+msg_main_menu = admin_messages["msg_main_menu"]
+msg_apps_menu = admin_messages["msg_apps_menu"]
+msg_help_menu = admin_messages["msg_help_menu"]
 
 # for no exists
 msg_noexs_number = admin_messages["msg_noexs_number"]
@@ -84,6 +97,10 @@ msg_noexs_status = admin_messages["msg_noexs_status"]
 msg_noexs_srvice = admin_messages["msg_noexs_srvice"]
 msg_noexs_sldate = admin_messages["msg_noexs_sldate"]
 msg_noexs_uphone = admin_messages["msg_noexs_uphone"]
+msg_noexs_help = admin_messages["msg_noexs_help"]
+msg_allhelp_noexs = admin_messages["msg_allhelp_noexs"]
+help_noexs_status = admin_messages["help_noexs_status"]
+help_noexs_uphone = admin_messages["help_noexs_uphone"]
 
 # for search handler
 msg_search_option = admin_messages["msg_search_option"]
@@ -98,6 +115,9 @@ msg_change_param = admin_messages["msg_change_param"]
 msg_change_price = admin_messages["msg_change_price"]
 msg_change_commt = admin_messages["msg_change_commt"]
 
+msg_search_helpid = admin_messages["msg_search_helpid"]
+msg_helps_select_param = admin_messages["msg_helps_select_param"]
+
 msg_change_failed_commt = admin_messages["msg_change_failed_commt"]
 msg_change_failed_price = admin_messages["msg_change_failed_price"]
 msg_change_failed_stats = admin_messages["msg_change_failed_stats"]
@@ -105,8 +125,23 @@ msg_change_failed_stats = admin_messages["msg_change_failed_stats"]
 msg_change_success_commt = admin_messages["msg_change_success_commt"]
 msg_change_success_price = admin_messages["msg_change_success_price"]
 msg_change_success_stats = admin_messages["msg_change_success_stats"]
+msg_help_change_success = admin_messages["msg_help_change_success"]
 
 # [admin_kb]
+adm_appls = admin_kb_text['adm_appls']
+adm_helps = admin_kb_text['adm_helps']
+
+admhelps_search = admin_kb_text['admhelps_search']
+admhelps_change = admin_kb_text['admhelps_change']
+
+hsearch_all = admin_kb_text["hsearch_all"]
+hsearch_hid = admin_kb_text["hsearch_hid"]
+hsearch_sts = admin_kb_text["hsearch_sts"]
+hsearch_uph = admin_kb_text["hsearch_uph"]
+
+helpstatus_1 = admin_kb_text["helpstatus_1"]
+helpstatus_2 = admin_kb_text["helpstatus_2"]
+
 adm_search = admin_kb_text['adm_search']
 adm_change = admin_kb_text['adm_change']
 adm_switch_user_menu = admin_kb_text['adm_switch_user_menu']
@@ -194,4 +229,8 @@ app_status_dict = {
     'appstatus_4': "Ожидание оплаты",
     'appstatus_5': "Правки",
     'appstatus_6': "Завершена",
+}
+help_status_dict = {
+    'helpstatus_1': 'В ожидании',
+    'helpstatus_2': 'Обработан'
 }

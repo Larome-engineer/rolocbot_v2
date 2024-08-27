@@ -50,7 +50,7 @@ def get_user_id_by_user_tg_id(tg_id: str):
     except (Error, NameError) as e:
         pool.putconn(conn)
         logging.log(level=logging.DEBUG,
-                    msg=f"{datetime.datetime.now().ctime()} | {e} | {module_name}: get__all_apps_info_by_date")
+                    msg=f"{datetime.datetime.now().ctime()} | {e} | {module_name}: get_user_id_by_user_tg_id")
         return False
 
 
@@ -69,5 +69,5 @@ def get_user_data_by_user_tg_id(tg_id: str):
     except (Error, NameError) as e:
         pool.putconn(conn)
         logging.log(level=logging.DEBUG,
-                    msg=f"{datetime.datetime.now().ctime()} | {e} | {module_name}: get__all_apps_info_by_date")
+                    msg=f"{datetime.datetime.now().ctime()} | {e} | {module_name}: get_user_data_by_user_tg_id")
         return False

@@ -1,9 +1,9 @@
 from data.messages import *
 from aiogram import Router, F
 from keyboards.user_kb import user_menu_kb
-from keyboards.admin_kb import adm_menu_kb
+from keyboards.admin_kb import adm_main_menu_kb
 from aiogram.fsm.context import FSMContext
-from roloc_create import roloc_bot, ADMIN_ID
+from roloc_create import roloc_bot, ADMIN_IDS
 from aiogram.filters.command import CommandStart
 from services.user_service import check_on_exists
 from aiogram.types import Message, CallbackQuery, BotCommand, BotCommandScopeDefault
@@ -24,8 +24,8 @@ async def set_commands(bot: roloc_bot):
 @start_router.message(CommandStart())
 async def start_handler(msg: Message, state: FSMContext):
     await state.clear()
-    if msg.from_user.id == ADMIN_ID:
-        await roloc_bot.send_message(ADMIN_ID, adm_hello, reply_markup=adm_menu_kb().as_markup())
+    if msg.from_user.id in ADMIN_IDS:
+        await roloc_bot.send_message(msg.from_user.id, adm_hello, reply_markup=adm_main_menu_kb().as_markup())
     else:
         user = check_on_exists(msg.from_user.id)
         if user is not None:
@@ -42,7 +42,7 @@ async def back_to_menu_handler(callback: CallbackQuery, state: FSMContext):
     await state.clear()
     await callback.answer()
 
-    if callback.from_user.id == ADMIN_ID:
-        await callback.message.edit_text(adm_hello, reply_markup=adm_menu_kb().as_markup())
+    if callback.from_user.id in ADMIN_IDS:
+        await callback.message.edit_text(adm_hello, reply_markup=adm_main_menu_kb().as_markup())
     else:
         await callback.message.edit_text(msg_hello, reply_markup=user_menu_kb().as_markup())

@@ -1,18 +1,20 @@
 from data.messages import *
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-from aiogram.types import InlineKeyboardButton, WebAppInfo
+from aiogram.types import InlineKeyboardButton
 
 
 def user_menu_kb():
-    return InlineKeyboardBuilder().row(
-        InlineKeyboardButton(text=menu_1, callback_data='menu_1'),
-        #InlineKeyboardButton(text=menu_w, web_app=WebAppInfo(url=link_wa)),
-        InlineKeyboardButton(text=menu_2, callback_data='menu_2'),
-        InlineKeyboardButton(text=menu_3, callback_data='menu_3'),
-        width=1
+    return (InlineKeyboardBuilder()
+            .row(InlineKeyboardButton(text=usermenu1, callback_data='usermenu1'), width=1)
+            .row(InlineKeyboardButton(text=usermenu3, callback_data='usermenu3'), width=1)
+            .row(
+        InlineKeyboardButton(text=usermenu4, callback_data='usermenu4'),
+                 InlineKeyboardButton(text=usermenu5, callback_data='usermenu5'), width=2)
+            .row(InlineKeyboardButton(text=usermenu2, callback_data='usermenu2'), width=1)
+            )
 
-    )
 
+# InlineKeyboardButton(text=menu_w, web_app=WebAppInfo(url=link_wa))
 
 def user_service_kb():
     return InlineKeyboardBuilder().row(

@@ -1,5 +1,20 @@
-from enums.EnumStatus import EnumApplicationsStatus
+from enums.EnumStatus import EnumApplicationsStatus, EnumHelpStatus
 
+def convert_help_to_value(status: str):
+    if status == EnumHelpStatus.WAITING.name:
+        return EnumHelpStatus.WAITING.value
+    elif status == EnumHelpStatus.COMPLETE.name:
+        return EnumHelpStatus.COMPLETE.value
+    else:
+        return 'Такого статуса не существует'
+
+def convert_help_to_name(status: str):
+    if status == EnumHelpStatus.WAITING.value:
+        return EnumHelpStatus.WAITING.name
+    elif status == EnumHelpStatus.COMPLETE.value:
+        return EnumHelpStatus.COMPLETE.name
+    else:
+        return 'Такого статуса не существует'
 
 def convert_to_enum_value(status: str) -> str:
     if status == EnumApplicationsStatus.NEW.name:

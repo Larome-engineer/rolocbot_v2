@@ -149,6 +149,23 @@ def get_all_apps_by_usr_phone(usr_phone: str) -> list | bool:  # get all apps by
         return False
 
 
+def get_apps_by_user_tg_id(tg_id: str):
+    conn = pool.getconn()
+    try:
+        with conn.cursor() as curs:
+            curs.execute("""select app_id, app_type, app_date, app_status, user_name, user_phone 
+            from applications left join users on user_id = app_user_id where user_tg_id = %s;""", (tg_id,))
+            res = curs.fetchall()
+
+        pool.putconn(conn)
+        return res
+
+    except (Error, NameError) as e:
+        pool.putconn(conn)
+        logging.log(level=logging.INFO,
+                    msg=f"{datetime.datetime.now().ctime()} | {e} | {module_name}: get_all_apps_info_by_usr_phone")
+        return False
+
 '''-----------------------------UPDATE FUNCTIONS-----------------------------'''
 
 
