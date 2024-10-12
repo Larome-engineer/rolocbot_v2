@@ -6,6 +6,7 @@ from data.config import LOG_FILE
 from handlers.start_handler import start_router
 from handlers.user.help_handler import help_router
 from handlers.user.about_handler import about_router
+from handlers.user.advice_handler import advice_router
 from handlers.user.app_from_handler import app_form_router
 
 from handlers.admin.appls_handler import appls_router
@@ -22,11 +23,12 @@ async def on_startup(bot: Bot) -> None: # WEBHOOK
 
 def main() -> None:
     dp.include_routers(
+        back_adm_router,
+        advice_router,
         start_router,
         about_router,
         help_router,
         adm_main_menu_router,
-        back_adm_router,
         appls_router,
         helps_router,
         app_form_router,

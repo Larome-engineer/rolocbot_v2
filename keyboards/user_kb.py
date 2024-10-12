@@ -5,13 +5,19 @@ from aiogram.types import InlineKeyboardButton
 
 def user_menu_kb():
     return (InlineKeyboardBuilder()
-            .row(InlineKeyboardButton(text=usermenu1, callback_data='usermenu1'), width=1)
-            .row(InlineKeyboardButton(text=usermenu3, callback_data='usermenu3'), width=1)
-            .row(
+    .row(InlineKeyboardButton(text=usermenu1, callback_data='usermenu1'), width=1)
+    .row(InlineKeyboardButton(text=usermenu3, callback_data='usermenu3'), width=1)
+    .row(InlineKeyboardButton(text=usermenu6, callback_data='usermenu6'), width=1)
+    .row(
         InlineKeyboardButton(text=usermenu4, callback_data='usermenu4'),
-                 InlineKeyboardButton(text=usermenu5, callback_data='usermenu5'), width=2)
-            .row(InlineKeyboardButton(text=usermenu2, callback_data='usermenu2'), width=1)
-            )
+        InlineKeyboardButton(text=usermenu5, callback_data='usermenu5'), width=2)
+    .row(
+        InlineKeyboardButton(text=usermenu2, callback_data='usermenu2'), width=1)
+    )
+
+def user_pdf_kb():
+    return (InlineKeyboardBuilder()
+    .row(InlineKeyboardButton(text=usermenu1, callback_data='pdfusermenu1'), width=1))
 
 
 # InlineKeyboardButton(text=menu_w, web_app=WebAppInfo(url=link_wa))
@@ -27,7 +33,6 @@ def user_service_kb():
         InlineKeyboardButton(text=serv_7, callback_data='serv_7'),
         InlineKeyboardButton(text=serv_8, callback_data='serv_8'),
         InlineKeyboardButton(text=serv_9, callback_data='serv_9'),
-        InlineKeyboardButton(text=serv_10, callback_data='serv_0'),
         width=1
     )
 

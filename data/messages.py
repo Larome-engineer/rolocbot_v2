@@ -25,6 +25,7 @@ msg_numsd = user_messages['msg_numsd']
 msg_sizze = user_messages['msg_sizze']
 msg_numpg = user_messages['msg_numpg']
 msg_produ = user_messages['msg_produ']
+msg_pdf = user_messages['msg_pdf']
 msg_userhelps_noexs = user_messages["msg_userhelps_noexs"]
 msg_userappls_noexs = user_messages["msg_userappls_noexs"]
 msg_userappls_failed = user_messages["msg_userappls_failed"]
@@ -40,7 +41,7 @@ usermenu2 = user_kb_text['usermenu2']
 usermenu3 = user_kb_text['usermenu3']
 usermenu4 = user_kb_text['usermenu4']
 usermenu5 = user_kb_text['usermenu5']
-
+usermenu6 = user_kb_text['usermenu6']
 
 link_vk = user_kb_text['link_vk']
 link_tg = user_kb_text['link_tg']
@@ -56,7 +57,6 @@ serv_6 = user_kb_text['serv_6']
 serv_7 = user_kb_text['serv_7']
 serv_8 = user_kb_text['serv_8']
 serv_9 = user_kb_text['serv_9']
-serv_10 = user_kb_text['serv_10']
 
 oneside = user_kb_text['oneside']
 twoside = user_kb_text['twoside']
@@ -183,7 +183,6 @@ c_match = {
     'serv_7': serv_7,
     'serv_8': serv_8,
     'serv_9': serv_9,
-    'serv_0': serv_10,
 
     # Page print match
     'side_1': oneside,
@@ -218,8 +217,7 @@ complex_options = {
     4: serv_5,
     5: serv_6,
     6: serv_7,
-    7: serv_8,
-    8: serv_9,
+    7: serv_8
 }
 
 app_status_dict = {

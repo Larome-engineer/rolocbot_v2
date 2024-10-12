@@ -69,6 +69,13 @@ async def user_app_form_start(callback: CallbackQuery, state: FSMContext):
     await state.set_state(AppFromState.type)
     await callback.message.edit_text(msg_servs, reply_markup=user_service_kb().as_markup())
 
+@app_form_router.callback_query(F.data.startswith('pdfusermenu1'))
+async def user_app_form_start_pdf(callback: CallbackQuery, state: FSMContext):
+    await state.clear()
+    await callback.answer()
+    await state.set_state(AppFromState.type)
+    await roloc_bot.send_message(callback.from_user.id, msg_servs, reply_markup=user_service_kb().as_markup())
+
 @app_form_router.callback_query(F.data.startswith('usermenu4'))
 async def get_all_user_apps(callback: CallbackQuery, state: FSMContext):
     await state.clear()
@@ -97,7 +104,7 @@ async def user_app_form_distribute(callback: CallbackQuery, state: FSMContext):
 
         await state.update_data(type=c_match[callback.data])
 
-        if c_data in ["1", "2", "3", "9"]:
+        if c_data in ["1", "2", "6", "8"]:
             user = check_on_exists(callback.from_user.id)
             if user is None or not user:
                 await state.set_state(AppFromState.username)
@@ -113,19 +120,19 @@ async def user_app_form_distribute(callback: CallbackQuery, state: FSMContext):
                 await state.set_state(AppFromState.user_cnt)
                 await callback.message.edit_text(msg_commt)
 
-        elif c_data in ["4", "7", "8"]:
+        elif c_data in ["5", "7"]:
             await state.set_state(AppFromState.sides)
             await callback.message.edit_text(msg_numsd, reply_markup=user_sides_kb().as_markup())
 
-        elif c_data == "5":
+        elif c_data == "3":
             await state.set_state(AppFromState.banner_size)
             await callback.message.edit_text(msg_sizze)
 
-        elif c_data == "6":
+        elif c_data == "4":
             await state.set_state(AppFromState.pages_size)
             await callback.message.edit_text(msg_numpg)
 
-        elif c_data == "0":
+        elif c_data == "9":
             await roloc_bot.send_poll(
                 chat_id=callback.from_user.id,
                 question=msg_quest,

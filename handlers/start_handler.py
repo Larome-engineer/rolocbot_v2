@@ -28,11 +28,11 @@ async def start_handler(msg: Message, state: FSMContext):
         await roloc_bot.send_message(msg.from_user.id, adm_hello, reply_markup=adm_main_menu_kb().as_markup())
     else:
         user = check_on_exists(msg.from_user.id)
-        if user is not None:
+        if not user or user is None:
+            await roloc_bot.send_message(msg.from_user.id, msg_hello, reply_markup=user_menu_kb().as_markup())
+        elif user is not None:
             await roloc_bot.send_message(msg.from_user.id, f"{msg_hello_exists}, {user['name']}",
                                          reply_markup=user_menu_kb().as_markup())
-        else:
-            await roloc_bot.send_message(msg.from_user.id, msg_hello, reply_markup=user_menu_kb().as_markup())
 
     await set_commands(roloc_bot)
 
